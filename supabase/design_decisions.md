@@ -1,0 +1,12 @@
+-- Design Decisions
+-- -----------------
+-- 1. **Enum vs Lookup Table**: Chose PostgreSQL `ENUM` types for static categories (goal_type, loan_type, investment_category, health_score_category, risk_appetite) because they are small, immutable, and provide compile‑time validation without extra joins.
+-- 2. **Income/Expense View**: Original schema stored only expense columns. Income is derived from `financial_profiles.monthly_income`. The view `income_vs_expense_last_n_months` now joins `expense_analysis` with `financial_profiles` and filters by `auth.uid()` to enforce per‑user RLS directly in the view.
+-- 3. **Savings Growth View**: Added explicit view `savings_growth` to compute monthly savings (income - expenses). This simplifies the RPC `get_dashboard_summary` and keeps business logic in SQL.
+-- 4. **Trigger for Users Profile**: Implemented a `SECURITY DEFINER` trigger on `auth.users` that auto‑creates a corresponding row in `public.users_profile` and a default `financial_profiles` row. This satisfies the requirement that a profile exists immediately after signup.
+-- 5. **Investment Allocation Check**: Added a `BEFORE INSERT OR UPDATE` trigger on `investments` that sums existing `allocation_percentage` for the user (excluding the current row on UPDATE) and raises an exception if the total would exceed 100. This enforces the business rule without requiring application‑side checks.
+-- 6. **Goal Target Date Validation**: Added a trigger on `goals` to ensure `target_date` is in the future at INSERT/UPDATE time, preventing nonsensical goal timelines.
+-- 7. **RLS Policies**: All tables have `FORCE ROW LEVEL SECURITY` and policies that compare `user_id` to `(SELECT auth.uid())`. Public (anon) role has no SELECT rights, ensuring strict isolation. Service role is granted privileged access only for inserting health scores and assistant chat messages.
+-- 8. **Storage Bucket**: Created a private bucket `reports` with a storage RLS policy that restricts objects to `<user_id>/` prefix, matching the `reports` table design.
+-- 9. **Timescaledb Extension**: Enabled `timescaledb` (optional) for potential time‑series performance improvements on `expense_analysis` and `health_scores`.
+-- 10. **Rollback Sections**: Each migration includes commented DROP statements to allow safe rollback via Supabase CLI.
