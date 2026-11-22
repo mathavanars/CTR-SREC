@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="" />
+    <title>ArthMitra - Learn to Invest</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- A live status label tells users whether the backend is ready. -->
+    <header class="topbar">
+      <button class="brand" id="brand-button" type="button">ArthMitra</button>
+      <div class="page-heading">
+        <span class="page-title" id="page-title">Learn to invest</span>
+        <small class="page-description" id="page-description"></small>
+      </div>
+      <div class="header-actions">
+        <button class="secondary-button sidebar-toggle hidden" id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="side-nav">Collapse menu</button>
+        <button class="secondary-button" id="demo-button" type="button">Demo mode</button>
+        <button class="avatar-button hidden" id="avatar-button" type="button" aria-label="Open profile menu" aria-expanded="false">A</button>
+        <div class="profile-menu hidden" id="profile-menu" role="menu">
+          <button type="button" role="menuitem" data-menu="profile">My profile</button>
+          <button type="button" role="menuitem" data-menu="edit-profile">Edit money details</button>
+          <button type="button" role="menuitem" data-menu="retake-quiz">Retake risk quiz</button>
+          <button type="button" role="menuitem" data-menu="report">Download my report</button>
+          <button type="button" role="menuitem" data-menu="about">About ArthMitra</button>
+          <button type="button" role="menuitem" id="theme-button">Dark mode</button>
+          <button type="button" role="menuitem" id="mode-button">Use detailed mode</button>
+          <button type="button" role="menuitem" data-menu="logout">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <aside class="side-nav hidden" id="side-nav" aria-label="Main navigation">
+      <button type="button" data-page="dashboard">⌂ <span>Home</span></button>
+      <button type="button" data-page="ideas">✦ <span>Investment ideas</span></button>
+      <button type="button" data-page="projector">↗ <span>Growth projector</span></button>
+      <button type="button" data-page="goals">◎ <span>Goals</span></button>
+      <button type="button" data-page="debts">▤ <span>Debts</span></button>
+      <button type="button" data-page="learn">▣ <span>Learn</span></button>
+      <button type="button" data-page="coach">☏ <span>AI coach</span></button>
+      <button type="button" data-page="reports">▧ <span>Reports</span></button>
+    </aside>
+
+    <!-- The main area changes one friendly page at a time. -->
+    <main id="app" class="app-shell">
+      <section class="card welcome-card">
+        <p class="eyebrow">AI investment learning assistant</p>
+        <h1>Make a calm, clear money plan</h1>
+        <p>Learn where to invest, how to invest, and how regular saving can grow over time.</p>
+        <div id="auth-tabs" class="tabs" aria-label="Account choice">
+          <button class="tab active" id="login-tab" type="button">Login</button>
+          <button class="tab" id="register-tab" type="button">Register</button>
+        </div>
+        <form id="auth-form" class="form-grid">
+          <label>Email
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </label>
+          <label>Password
+            <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required />
+          </label>
+          <button id="auth-submit" type="submit">Login</button>
+        </form>
+        <p id="status" role="status" class="status">Checking backend...</p>
+      </section>
+    </main>
+
+    <nav class="mobile-nav hidden" id="mobile-nav" aria-label="Mobile navigation">
+      <button type="button" data-page="dashboard">⌂<span>Home</span></button>
+      <button type="button" data-page="ideas">✦<span>Ideas</span></button>
+      <button type="button" data-page="projector">↗<span>Project</span></button>
+      <button type="button" data-page="goals">◎<span>Goals</span></button>
+      <button type="button" id="mobile-more" aria-expanded="false">•••<span>More</span></button>
+      <div class="mobile-more-menu hidden" id="mobile-more-menu">
+        <button type="button" data-page="debts">Debts</button>
+        <button type="button" data-page="learn">Learn</button>
+        <button type="button" data-page="coach">AI coach</button>
+        <button type="button" data-page="reports">Reports</button>
+      </div>
+    </nav>
+
+    <!-- Every page shows the same safety reminder. -->
+    <footer>
+      <span id="app-credit"></span><br />
+      Educational guidance only. Not licensed financial advice. Investments carry risk. Returns are not guaranteed.
+    </footer>
+    <script src="./js/guard.js"></script>
+    <script type="module" src="./bootstrap.js"></script>
+  </body>
+</html>

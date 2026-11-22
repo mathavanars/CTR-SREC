@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/health",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(auth|profile|goals|debts|report|smart-amount|smart-monthly-amount|chat|risk-quiz|onboarding|analysis|plan|market-snapshot|investment-ideas|readiness|health-score|projection)(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ]
+}

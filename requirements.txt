@@ -1,0 +1,32 @@
+# FastAPI provides the web API used by the ArthMitra frontend.
+fastapi>=0.115.12
+
+# Uvicorn serves the API while it is running.
+uvicorn[standard]>=0.34.2
+
+# Pydantic provides friendly input validation for API requests.
+pydantic>=2.11.4
+
+# Pytest runs the calculation checks before the app should start.
+pytest>=8.3.5
+
+# SQLAlchemy gives safe SQLite database access.
+sqlalchemy>=2.0.40
+
+# bcrypt turns passwords into passwords that cannot be read directly.
+bcrypt>=4.3.0
+
+# PyJWT creates short-lived login tokens.
+pyjwt>=2.10.1
+
+# python-dotenv reads private settings from .env.
+python-dotenv>=1.1.0
+
+# TestClient uses HTTPX to exercise API routes in tests.
+httpx>=0.28.1
+
+# ReportLab creates real PDF files from the saved report data.
+reportlab>=4.2.0
+
+# Matplotlib draws the report charts that appear in downloaded PDF files.
+matplotlib>=3.9.0
